@@ -16,7 +16,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-url = "https://raw.githubusercontent.com/USUARIO/atividade-dados-imoveis/main/dados/imoveis.csv"
+url = "https://raw.githubusercontent.com/rubity/atividade-dados-imoveis/main/dados/imoveis.csv"
 df = pd.read_csv(url)
 
 df.head()
@@ -25,7 +25,7 @@ df.head()
 Se preferir baixar o repositório inteiro, também funciona:
 
 ```python
-!git clone https://github.com/USUARIO/atividade-dados-imoveis.git
+!git clone https://github.com/rubity/atividade-dados-imoveis.git
 df = pd.read_csv("atividade-dados-imoveis/dados/imoveis.csv")
 ```
 
