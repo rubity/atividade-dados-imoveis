@@ -1,39 +1,24 @@
-# Atividade: preparação de dados de aluguel
+# Atividade: limpeza de dados de aluguel
 
-Nesta atividade você vai trabalhar com os dados de uma imobiliária fictícia da cidade de Vila Nova. A imobiliária juntou anúncios de aluguel de várias fontes e quer, no futuro, treinar um modelo para prever o preço do aluguel. Antes disso, os dados precisam ser avaliados e preparados.
+Esses dados são de uma imobiliária fictícia da cidade de Vila Nova. Ela juntou anúncios de aluguel de vários lugares e um dia quer usar isso para prever o preço do aluguel. Só que os dados vieram bagunçados, do jeito que costuma acontecer na vida real.
 
-Você não vai treinar nenhum modelo aqui. O foco é entender os dados, encontrar o que está errado e decidir o que fazer com cada problema.
+A ideia é simples: explorar os dados, achar o que está errado, arrumar do jeito que você achar melhor e salvar uma versão final limpa do dataset. Não precisa treinar nenhum modelo.
 
-## Como começar
+## Carregando os dados
 
-1. Abra o Google Colab em colab.research.google.com e crie um notebook novo.
-2. Dê ao notebook o nome `atividade_dados_seunome`.
-3. Na primeira célula, cole o código abaixo para carregar os dados direto deste repositório.
+Crie um notebook novo no [Google Colab](https://colab.research.google.com) e rode isso na primeira célula:
 
 ```python
 import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-import seaborn as sns
 
 url = "https://raw.githubusercontent.com/rubity/atividade-dados-imoveis/main/dados/imoveis.csv"
 df = pd.read_csv(url)
-
 df.head()
 ```
 
-Se preferir baixar o repositório inteiro, também funciona:
+Depois disso, use as bibliotecas que quiser.
 
-```python
-!git clone https://github.com/rubity/atividade-dados-imoveis.git
-df = pd.read_csv("atividade-dados-imoveis/dados/imoveis.csv")
-```
-
-Se aparecer algum erro de leitura, confira se a url está correta e se o arquivo está em `dados/imoveis.csv`.
-
-## Sobre os dados
-
-O arquivo tem uma linha por anúncio. Os dados foram montados de propósito com vários problemas, como acontece com dados reais.
+## As colunas
 
 | Coluna | O que é |
 |---|---|
@@ -54,44 +39,23 @@ O arquivo tem uma linha por anúncio. Os dados foram montados de propósito com 
 | cidade | Cidade do anúncio |
 | preco_aluguel | Valor do aluguel mensal em reais |
 
-A coluna que a imobiliária quer prever no futuro é `preco_aluguel`.
+O que a imobiliária quer prever no futuro é o `preco_aluguel`, então vale ter isso em mente na hora de decidir o que manter.
 
 ## O que fazer
 
-Faça tudo no mesmo notebook, na ordem abaixo. Escreva um texto curto em uma célula de texto depois de cada etapa explicando o que encontrou e o que decidiu.
+1. **Explore os dados.** Tamanho da tabela, tipos das colunas, estatísticas, gráficos, o que você achar útil para entender o que tem ali.
+2. **Trate o que estiver errado.** Você decide o que é problema e como resolver. Não existe uma única resposta certa, só deixe anotado no notebook o que você fez e por quê.
+3. **Salve o dataset limpo.** No final, salve a sua versão tratada em um CSV:
 
-**1. Conhecer os dados.** Veja o tamanho da tabela, os tipos de cada coluna, as estatísticas básicas e a porcentagem de valores preenchidos em cada coluna. Anote o que chamou sua atenção.
+```python
+df.to_csv("imoveis_limpo.csv", index=False)
 
-**2. Correlações.** Monte uma matriz de correlação e um gráfico para visualizar. Quais atributos parecem mais ligados ao preço? Existe algum par de colunas que diz quase a mesma coisa?
+from google.colab import files
+files.download("imoveis_limpo.csv")
+```
 
-**3. Limpeza.** Trate os valores ausentes, as linhas repetidas e os textos escritos de formas diferentes. Cada coluna com valores ausentes pode pedir uma solução diferente, então pense em cada uma separadamente.
-
-**4. Valores extremos.** Procure valores muito altos, muito baixos ou impossíveis. Decida o que é erro e o que é um dado real que só é raro.
-
-**5. Escolha de atributos.** Decida quais colunas vão ficar e quais vão sair, e explique por quê.
-
-**6. Codificação.** Transforme as colunas de texto que ficaram em números, escolhendo a técnica mais adequada para cada uma.
-
-**7. Resumo das decisões.** No final do notebook, faça uma tabela com três colunas: problema encontrado, o que você fez e por que fez.
-
-## Regras e dicas
-
-Não existe uma única resposta certa. O que vale é a decisão ser coerente e bem justificada.
-
-Escreva as justificativas com as suas palavras. Código sem explicação não conta como resposta.
-
-Algumas dicas: nem todo valor ausente significa a mesma coisa, nem todo valor extremo é um erro, e vale olhar para o dado antes e depois de cada mudança para ter certeza de que a correção funcionou. Pesquisar na documentação do pandas é permitido e esperado.
+Se não souber por onde começar, algumas perguntas ajudam: tem valor faltando? Tem linha repetida? Tem texto escrito de jeitos diferentes? Tem número que não faz sentido? Tem coluna que não serve para nada?
 
 ## Entrega
 
-Entregue o link do seu notebook no Colab, com o compartilhamento aberto para quem tem o link. Antes de enviar, use a opção Ambiente de execução, Executar tudo, para garantir que o notebook roda do início ao fim sem erros. Prazo e forma de envio serão combinados em aula.
-
-## Como será avaliado
-
-| Critério | Peso |
-|---|---|
-| Exploração dos dados e correlações | 20% |
-| Limpeza (ausentes, duplicados, textos) | 25% |
-| Tratamento de valores extremos | 15% |
-| Escolha de atributos e codificação | 20% |
-| Justificativas, organização e notebook rodando | 20% |
+Mande o link do seu notebook no Colab (com o compartilhamento aberto para quem tiver o link) e o arquivo `imoveis_limpo.csv`. Antes de enviar, rode tudo de novo em Ambiente de execução > Executar tudo, para ver se funciona do começo ao fim.
